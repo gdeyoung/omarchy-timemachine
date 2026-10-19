@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "id": "gdeyoung.timemachine",
+  "name": "TimeMachine",
+  "version": "0.5.4",
+  "author": "gdeyoung",
+  "license": "MIT",
+  "description": "Self-hosted time machine: unencrypted rsync backups to your own NAS plus local btrfs snapshots — six-tab popup (Status/Backups/Snapshots/Health/Recovery/Settings) with a collapsible day picker, first-run setup wizard, bundled backup engine, systemd timer install, weekly sentinel verification.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "TimeMachine",
+    "description": "Backup status (ok <26h · stale <72h · fail · running pulse) — six-tab panel: Status / Backups / Snapshots / Health / Recovery / Settings, with Back up now / Run drill actions, collapsible day pickers and configurable thresholds",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "refreshSeconds": 15,
+      "staleHours": 26,
+      "failHours": 72,
+      "historyDays": 14,
+      "snapshotRows": 10
+    },
+    "schema": [
+      {
+        "key": "refreshSeconds",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "defaultValue": 15
+      },
+      {
+        "key": "staleHours",
+        "type": "integer",
+        "label": "Stale after (hours)",
+        "min": 1,
+        "max": 168,
+        "step": 1,
+        "defaultValue": 26
+      },
+      {
+        "key": "failHours",
+        "type": "integer",
+        "label": "Fail after (hours)",
+        "min": 2,
+        "max": 336,
+        "step": 1,
+        "defaultValue": 72
+      },
+      {
+        "key": "historyDays",
+        "type": "integer",
+        "label": "History window (days)",
+        "min": 3,
+        "max": 90,
+        "step": 1,
+        "defaultValue": 14
+      },
+      {
+        "key": "snapshotRows",
+        "type": "integer",
+        "label": "Rows shown per expanded day",
+        "min": 5,
+        "max": 50,
+        "step": 5,
+        "defaultValue": 10
+      }
+    ]
+  }
+}

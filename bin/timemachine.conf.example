@@ -1,0 +1,48 @@
+# timemachine.conf — Time Machine engine configuration.
+# Copy to ~/.config/timemachine.conf and edit. All keys optional except
+# TM_HOST and TM_DEST; unset keys fall back to the defaults shown.
+# Written by the plugin's Settings tab via `tm-conf.sh set` — hand edits
+# are fine too.
+
+# --- backup target (required) ---------------------------------------------
+# SSH target as [user@]host. Key-based auth strongly recommended.
+#TM_HOST=root@192.0.2.10
+# Remote directory that will hold backups/ and latest. Must exist or the
+# ssh user must be allowed to create it.
+#TM_DEST=/mnt/pool/timemachine
+#TM_SSH_PORT=22
+# Short display label shown in the popup (defaults to the hostname).
+#TM_LABEL=nas
+
+# --- what & where locally --------------------------------------------------
+# State/stamp directory (last-backup.json, history.jsonl, drill/verify/health).
+#TM_STATE_DIR=~/.local/state/timemachine
+# rsync exclude file (one pattern per line, rsync syntax). Created with a
+# starter set by `tm-conf.sh init`.
+#TM_EXCLUDES=~/.config/timemachine-excludes.txt
+
+# --- schedule & retention ---------------------------------------------------
+# Comma list of HH:MM slots; each becomes an OnCalendar entry in the timer
+# installed by `tm-conf.sh install`.
+#TM_SCHEDULE=09:20,21:20
+#TM_UNIT=timemachine-backup
+#TM_RETENTION_DAILY=14
+#TM_RETENTION_WEEKLY=8
+#TM_RETENTION_MONTHLY=12
+
+# --- integrity & health -----------------------------------------------------
+# Day-of-week for the sentinel sha256 verify: 1=Mon … 7=Sun.
+#TM_VERIFY_DOW=7
+# Colon-separated $HOME-relative files checked by the Sunday verify and the
+# restore drill. Pick files that MUST survive: identity/config/data.
+#TM_SENTINELS=.config/omarchy/shell.json:.hermes/config.yaml
+# Health check fails when the last backup stamp is older than this many hours.
+#TM_MAX_AGE_H=30
+# Command run via sh -c when the health check FAILS (e.g. a notify CLI).
+#TM_NOTIFY_CMD=
+
+# --- hooks -------------------------------------------------------------------
+# Commands run via sh -c. PRE runs before the snapshot (quiesce DBs, commit
+# state); failures abort the backup. POST runs last (cleanup, reports).
+#TM_PRE_HOOK=
+#TM_POST_HOOK=
